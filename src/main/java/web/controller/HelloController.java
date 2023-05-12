@@ -17,7 +17,7 @@ public class HelloController {
         messages.add("I'm Spring CRUD Application");
         messages.add("Version by 10.05.2023");
         model.addAttribute("messages", messages);
-        return "index";
+        return "welcomePage";
     }
 
 }

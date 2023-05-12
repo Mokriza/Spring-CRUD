@@ -14,6 +14,9 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "surname")
+    private String surname;
+
     @Column(name = "age")
     private int age;
 
@@ -23,8 +26,9 @@ public class User {
     public User() {
     }
 
-    public User(String name, int age, String email) {
+    public User(String name, String surname, int age, String email) {
         this.name = name;
+        this.surname = surname;
         this.age = age;
         this.email = email;
     }
@@ -43,6 +47,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public int getAge() {
