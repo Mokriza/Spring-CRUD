@@ -32,8 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
-        model.addAttribute("newUser", new User());
+    public String newUser(@ModelAttribute("newUser") User user) {
         return "users/new";
     }
 
@@ -42,4 +41,18 @@ public class UserController {
         userService.createUser(user);
         return "redirect:/users";
     }
+
+    @GetMapping("/{id}/edit")
+    public String editUser(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", userService.getUser(id));
+        return "users/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        userService.updateUser(id, user);
+        return "redirect:/users";
+    }
+
+
 }

@@ -13,9 +13,9 @@ public class HelloController {
     @GetMapping(value = "/")
     public String printWelcome(ModelMap model) {
         List<String> messages = new ArrayList<>();
-        messages.add("Hello!");
-        messages.add("I'm Spring CRUD Application");
-        messages.add("Version by 10.05.2023");
+        messages.add("Привет!");
+        messages.add("Вы попали в учебное CRUD приложение");
+        messages.add("Для перехода к списку пользователей нажмите на ссылку ниже");
         model.addAttribute("messages", messages);
         return "welcomePage";
     }

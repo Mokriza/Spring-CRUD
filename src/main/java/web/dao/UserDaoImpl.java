@@ -25,30 +25,28 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-//        return entityManager.createNativeQuery("SELECT * FROM kataacademy.users", User.class).getResultList();
         return entityManager.createQuery("SELECT u FROM User u").getResultList();
     }
 
     @Override
     public void createUser(User user) {
-//        entityManager.getTransaction().begin();
         entityManager.persist(user);
-//        entityManager.getTransaction().commit();
     }
 
     @Override
-    public void updateUser(Long id, String[] params) {
-        entityManager.getTransaction().begin();
-        User user = entityManager.find(User.class, id);
-
-
+    public void updateUser(Long id, User user) {
+        User u = entityManager.find(User.class, id);
+        u.setName(user.getName());
+        u.setSurname(user.getSurname());
+        u.setAge(user.getAge());
+        u.setEmail(user.getEmail());
     }
 
     @Override
     public void deleteUser(Long id) {
-        entityManager.getTransaction().begin();
+//        entityManager.getTransaction().begin();
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
-        entityManager.getTransaction().commit();
+//        entityManager.getTransaction().commit();
     }
 }
