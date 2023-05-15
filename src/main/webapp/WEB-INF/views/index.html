@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+</head>
+<body>
+
+<h1>Список пользователей</h1>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+        <tr th:each="user : ${usersList}">
+            <td th:text="${user.getId()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getSurname()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td>
+                <form th:method="PATCH" th:action="@{/{id}/edit(id=${user.getId()})}"><input type="submit"
+                                                                                                   value="Редактировать">
+                </form>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Удалить">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<br/>
+<hr/>
+<form th:attr="action=@{/new}">
+    <input type="submit" value="Создать нового пользователя"/>
+</form>
+
+</body>
+</html>

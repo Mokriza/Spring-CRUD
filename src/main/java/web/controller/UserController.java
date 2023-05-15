@@ -9,7 +9,6 @@ import web.service.UserService;
 
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -19,44 +18,38 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("usersList", userService.getAllUsers());
-        return "users/index";
-    }
-
-    @GetMapping("/{id}")
-    public String showUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.getUser(id));
-        return "users/showUser";
+        return "index";
     }
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute("newUser") User user) {
-        return "users/new";
+        return "new";
     }
 
     @PostMapping()
     public String createUser(@ModelAttribute("newUser") User user) {
         userService.createUser(user);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
-    @GetMapping("/{id}/edit")
+    @PatchMapping("/{id}/edit")
     public String editUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        return "users/edit";
+        return "edit";
     }
 
     @PatchMapping("/{id}")
     public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
         userService.updateUser(id, user);
-        return "redirect:/users";
+        return "redirect:/";
     }
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
 
 
